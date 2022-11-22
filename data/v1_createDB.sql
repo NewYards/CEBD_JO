@@ -29,6 +29,30 @@ CREATE TABLE LesEpreuves
   CONSTRAINT EP_CK4 CHECK (nbSportifsEp > 0)
 );
 
--- TODO 1.4a : ajouter la définition de la vue LesAgesSportifs
--- TODO 1.5a : ajouter la définition de la vue LesNbsEquipiers
+-- DONETODO 1.4a : ajouter la définition de la vue LesAgesSportifs
+
+CREATE VIEW IF NOT EXISTS LesAgesSportifs(numSp, age)
+AS
+   SELECT numSp, strftime('%Y', 'now') - strftime('%Y', dateNaisSp)
+   FROM LesSportifsEQ
+   WHERE strftime('%m', 'now') > strftime('%m', dateNaisSp) OR
+         strftime('%m', 'now') = strftime('%m', dateNaisSp) AND strftime('%d', 'now') = strftime('%d', dateNaisSp)
+   UNION
+   SELECT numSp, strftime('%Y', 'now') - strftime('%Y', dateNaisSp) - 1
+   FROM LesSportifsEQ
+   WHERE NOT(strftime('%m', 'now') > strftime('%m', dateNaisSp) OR
+         strftime('%m', 'now') = strftime('%m', dateNaisSp) AND strftime('%d', 'now') = strftime('%d', dateNaisSp));
+
+-- DONETODO 1.5a : ajouter la définition de la vue LesNbsEquipiers
+
+CREATE VIEW IF NOT EXISTS LesNbsEquipiers(numSp, nbEquipiers, numEq)
+AS
+    WITH nbPerEq as(
+        SELECT COUNT(numEq)-1 nbEquipiers, numEq
+        FROM LesSportifsEQ
+        GROUP BY numEq
+    )
+    SELECT numSp, nbEquipiers, numEq
+    FROM LesSportifsEQ JOIN nbPerEq USING(numEq);
+
 -- TODO 3.3 : ajouter les éléments nécessaires pour créer le trigger (attention, syntaxe SQLite différent qu'Oracle)
