@@ -42,5 +42,9 @@ class AppTablesDataV1(QDialog):
         self.refreshTable(self.ui.label_sportifs, self.ui.tableSportifs, "SELECT numSp, nomSp, prenomSp, pays, categorieSp, dateNaisSp, numEq FROM LesSportifsEQ")
 
         # TODO 1.3 : modifier pour afficher les nouveaux éléments (il faut aussi changer le fichier .ui correspondant)
-        # TODO 1.4b : ajouter l'affichage des éléments de la vue LesAgesSportifs après l'avoir créée
-        # TODO 1.5b : ajouter l'affichage des éléments de la vue LesNbsEquipiers après l'avoir créée
+        # DONETODO 1.4b : ajouter l'affichage des éléments de la vue LesAgesSportifs après l'avoir créée
+        self.refreshTable(self.ui.label_lesAgesSportifs, self.ui.tableLesAgesSportifs,
+                          "SELECT numSp, age FROM LesAgesSportifs")
+        # DONETODO 1.5b : ajouter l'affichage des éléments de la vue LesNbsEquipiers après l'avoir créée
+        self.refreshTable(self.ui.label_lesNbsEquipiers, self.ui.tableLesNbsEquipiers,
+                          "SELECT numSp, nbEquipiers, numEq FROM LesNbsEquipiers")
