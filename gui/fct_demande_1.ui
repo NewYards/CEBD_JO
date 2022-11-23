@@ -30,22 +30,12 @@
      </attribute>
      <column>
       <property name="text">
-       <string>nomSp</string>
+       <string>AVERAGE(age)</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>prenomSp</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>pays</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>categorieSp</string>
+       <string>numEq</string>
       </property>
      </column>
     </widget>

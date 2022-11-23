@@ -11,7 +11,7 @@ class AppFctDemande1(QDialog):
     # Constructeur
     def __init__(self, data: sqlite3.Connection):
         super(QDialog, self).__init__()
-        self.ui = uic.loadUi("gui/fct_fournie_1.ui", self)
+        self.ui = uic.loadUi("gui/fct_demande_1.ui", self)
         self.data = data
         self.refreshResult()
 
@@ -22,7 +22,7 @@ class AppFctDemande1(QDialog):
         display.refreshLabel(self.ui.label_fct_fournie_1, "")
         try:
             cursor = self.data.cursor()
-            result = cursor.execute("SELECT nomSp, prenomSp, pays, categorieSp FROM V0_LesSportifsEQ WHERE numEq = 1")
+            result = cursor.execute("SELECT AVG(age), numEq FROM LesEpreuves JOIN LesEquipes ON(res_or == numEq) JOIN LesAgesSportifs USING(numSp) GROUP BY numEq ")
         except Exception as e:
             self.ui.table_fct_fournie_1.setRowCount(0)
             display.refreshLabel(self.ui.label_fct_fournie_1, "Impossible d'afficher les résultats : " + repr(e))
