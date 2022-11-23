@@ -1,6 +1,8 @@
--- TODO 1.3a : Détruire les tables manquantes et modifier celles ci-dessous
+-- DONETODO 1.3a : Détruire les tables manquantes et modifier celles ci-dessous
 DROP TABLE IF EXISTS LesEpreuves;
-DROP TABLE IF EXISTS LesSportifsEQ;
+DROP TABLE IF EXISTS LesSportifs;
+DROP TABLE IF EXISTS LesEquipes;
+DROP TABLE IF EXISTS LesParticipants;
 
 DROP VIEW IF EXISTS LesAgesSportifs;
 DROP VIEW IF EXISTS LesNbsEquipiers;
