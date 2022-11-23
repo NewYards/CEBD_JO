@@ -30,7 +30,7 @@ CREATE TABLE LesParticipants
   CONSTRAINT PA_PK PRIMARY KEY (numIns, numEp),
   FOREIGN KEY (numIns) REFERENCES LesSportifs(numSp),
   FOREIGN KEY (numIns) REFERENCES LesEquipes(numEq),
-  FOREIGN KEY (numEp) REFERENCES LesEpreuves(numEp),
+  FOREIGN KEY (numEp) REFERENCES LesEpreuves(numEp)
 );
 
 CREATE TABLE LesEpreuves
@@ -71,15 +71,22 @@ AS
 
 -- DONETODO 1.5a : ajouter la définition de la vue LesNbsEquipiers
 
-CREATE VIEW IF NOT EXISTS LesNbsEquipiers(numSp, nbEquipiers, numEq)
+--CREATE VIEW IF NOT EXISTS LesNbsEquipiers(numSp, nbEquipiers, numEq)
+--AS
+--   WITH nbPerEq as(
+--        SELECT COUNT(numEq)-1 nbEquipiers, numEq
+--        FROM LesEquipes
+--        GROUP BY numEq
+--    )
+--    SELECT numSp, nbEquipiers, numEq
+--    FROM LesSportifs JOIN LesEquipes USING(numSp)
+--                     JOIN nbPerEq USING(numEq);
+
+
+CREATE VIEW IF NOT EXISTS LesNbsEquipiers(nbEquipiers, numEq)
 AS
-    WITH nbPerEq as(
-        SELECT COUNT(numEq)-1 nbEquipiers, numEq
-        FROM LesEquipes
-        GROUP BY numEq
-    )
-    SELECT numSp, nbEquipiers, numEq
-    FROM LesSportifs JOIN LesEquipes USING(numSp)
-                     JOIN nbPerEq USING(numEq);
+    SELECT COUNT(numEq) nbEquipiers, numEq
+    FROM LesEquipes
+    GROUP BY numEq;
 
 -- TODO 3.3 : ajouter les éléments nécessaires pour créer le trigger (attention, syntaxe SQLite différent qu'Oracle)

@@ -37,14 +37,18 @@ class AppTablesDataV1(QDialog):
     # Fonction permettant de mettre à jour toutes les tables
     @pyqtSlot()
     def refreshAllTablesV1(self):
-
-        self.refreshTable(self.ui.label_epreuves, self.ui.tableEpreuves, "SELECT numEp, nomEp, formeEp, nomDi, categorieEp, nbSportifsEp, dateEp FROM LesEpreuves")
-        self.refreshTable(self.ui.label_sportifs, self.ui.tableSportifs, "SELECT numSp, nomSp, prenomSp, pays, categorieSp, dateNaisSp, numEq FROM LesSportifsEQ")
-
-        # TODO 1.3 : modifier pour afficher les nouveaux éléments (il faut aussi changer le fichier .ui correspondant)
+        # DONETODO 1.3 : modifier pour afficher les nouveaux éléments (il faut aussi changer le fichier .ui correspondant)
+        self.refreshTable(self.ui.label_epreuves, self.ui.tableEpreuves,
+                          "SELECT numEp, nomEp, formeEp, nomDi, categorieEp, nbSportifsEp, dateEp, res_or, res_argent, res_bronze FROM LesEpreuves")
+        self.refreshTable(self.ui.label_sportifs, self.ui.tableSportifs,
+                          "SELECT numSp, nomSp, prenomSp, pays, categorieSp, dateNaisSp FROM LesSportifs")
+        self.refreshTable(self.ui.label_equipes, self.ui.tableEquipes,
+                          "SELECT numSp, numEq FROM LesEquipes")
+        self.refreshTable(self.ui.label_participants, self.ui.tableParticipants,
+                          "SELECT numIns, numEp FROM LesParticipants")
         # DONETODO 1.4b : ajouter l'affichage des éléments de la vue LesAgesSportifs après l'avoir créée
         self.refreshTable(self.ui.label_lesAgesSportifs, self.ui.tableLesAgesSportifs,
                           "SELECT numSp, age FROM LesAgesSportifs")
         # DONETODO 1.5b : ajouter l'affichage des éléments de la vue LesNbsEquipiers après l'avoir créée
         self.refreshTable(self.ui.label_lesNbsEquipiers, self.ui.tableLesNbsEquipiers,
-                          "SELECT numSp, nbEquipiers, numEq FROM LesNbsEquipiers")
+                          "SELECT nbEquipiers, numEq FROM LesNbsEquipiers")
